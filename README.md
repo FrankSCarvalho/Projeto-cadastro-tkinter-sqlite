@@ -1,4 +1,4 @@
-# Projeto Cadastro usando tkinter e sqlite.
+# Projeto Cadastro usando Tkinter e Sqlite.
 
 Nesse projeto vou fazer um sistema de cadastro usando python.
 
