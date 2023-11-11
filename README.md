@@ -6,7 +6,7 @@ Estou seguindo o tutorial do YouTube do canao Usando Python
 
 video 1 - https://www.youtube.com/watch?v=7N25wyyJ7pc
 
-video 2 - https://www.youtube.com/watch?v=bqHbY9cJZbo  Parei aqui!
+video 2 - https://www.youtube.com/watch?v=bqHbY9cJZbo  
 
 video 3 - https://www.youtube.com/watch?v=2uYqJVe_0RU
 
