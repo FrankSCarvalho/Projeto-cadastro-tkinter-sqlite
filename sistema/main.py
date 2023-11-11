@@ -1,4 +1,4 @@
-#Importando TkInter
+# Importando TkInter
 from tkinter import *
 
 ################# cores ###############
@@ -22,5 +22,17 @@ janela.geometry("1043x453")
 janela.configure(background=co9)
 
 janela.resizable(width=FALSE, height=FALSE)
+
+
+# dividindo janela
+
+frame_cima = Frame(janela, width=310, height=50, bg=co2, relief='flat')
+frame_cima.grid(row=0, column=0)
+
+frame_baixo = Frame(janela, width=310, height=400, bg=co1, relief='flat')
+frame_baixo.grid(row=1, column=0, sticky=NSEW, padx=0, pady=1)
+
+frame_esquerda = Frame(janela, width=588, height=400, bg=co1, relief='flat')
+frame_esquerda.grid(row=0, column=1, rowspan=2, padx=1, pady=0, sticky=NSEW)
 
 janela.mainloop()
