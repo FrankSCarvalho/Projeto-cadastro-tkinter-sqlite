@@ -1,5 +1,8 @@
 # Importando TkInter
 from tkinter import *
+
+from tkinter import ttk
+
 # importando o Calendario para Data
 from tkcalendar import Calendar, DateEntry
 
