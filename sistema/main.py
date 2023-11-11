@@ -2,9 +2,12 @@
 from tkinter import *
 
 from tkinter import ttk
+from tkinter import messagebox
 
 # importando o Calendario para Data
 from tkcalendar import Calendar, DateEntry
+
+from view import *
 
 ################# cores ###############
 co0 = "#f0f3f5"  # Preta
@@ -45,8 +48,122 @@ frame_direita.grid(row=0, column=1, rowspan=2, padx=1, pady=0, sticky=NSEW)
 app_nome = Label(frame_cima, text='Formulário de consultoria',  font=('Ivy 13 bold'), bg=co2, fg=co1, relief='flat')
 app_nome.place(x=10, y=20)
 
-
+global tree
 #Configurando Frame Baixo
+
+#Função inserir
+def inserir():
+    nome = e_nome.get()
+    email = e_email.get()
+    telefone = e_telefone.get()
+    data = e_data.get()
+    estado = e_estado.get()
+    sobre = e_sobre.get()
+
+    lista = [nome, email,telefone,data,estado,sobre]
+
+    if nome == "":
+        messagebox.showerror('Erro', 'Preencha o campo nome')
+    else:
+        inserir_info(lista)
+        messagebox.showinfo('Sucesso', 'Dados gravados com sucesso!')
+
+        e_nome.delete(0,'end')
+        e_email.delete(0,'end')
+        e_telefone.delete(0,'end')
+        e_data.delete(0,'end')
+        e_estado.delete(0,'end')
+        e_sobre.delete(0,'end')
+
+
+    for widget in frame_direita.winfo_children():
+        widget.destroy()
+
+    mostrar()
+
+#Função Atualizar
+
+
+def atualizar():
+    try:
+        treev_dados = tree.focus()
+        treev_dicionario = tree.item(treev_dados)
+        tree_lista = treev_dicionario['values']
+
+        valor_id = tree_lista[0]
+
+        e_nome.delete(0,'end')
+        e_email.delete(0,'end')
+        e_telefone.delete(0,'end')
+        e_data.delete(0,'end')
+        e_estado.delete(0,'end')
+        e_sobre.delete(0,'end')
+
+        e_nome.insert(0, tree_lista[1])
+        e_email.insert(0, tree_lista[2])
+        e_telefone.insert(0, tree_lista[3])
+        e_data.insert(0, tree_lista[4])
+        e_estado.insert(0, tree_lista[5])
+        e_sobre.insert(0, tree_lista[6])
+
+        #Função inserir
+        def update():
+            nome = e_nome.get()
+            email = e_email.get()
+            telefone = e_telefone.get()
+            data = e_data.get()
+            estado = e_estado.get()
+            sobre = e_sobre.get()
+
+            lista = [ nome, email,telefone,data,estado,sobre,valor_id]
+
+            if nome == "":
+                messagebox.showerror('Erro', 'Preencha o campo nome')
+            else:
+                atualizar_info(lista)
+                messagebox.showinfo('Sucesso', 'Dados atualizados com sucesso!')
+
+                e_nome.delete(0,'end')
+                e_email.delete(0,'end')
+                e_telefone.delete(0,'end')
+                e_data.delete(0,'end')
+                e_estado.delete(0,'end')
+                e_sobre.delete(0,'end')
+
+
+            for widget in frame_direita.winfo_children():
+                widget.destroy()
+
+            mostrar()
+
+        #Botão Confirmar
+        b_confirmar = Button(frame_baixo, command=update, text='Confirmar', width=10, font=('Ivy 9 bold'), bg=co2, fg=co1, relief='raised', overrelief='ridge')
+        b_confirmar.place(x=110, y=360)
+
+        
+    except IndexError:
+        messagebox.showerror('Erro', 'Selecione um dos dados na tabela')
+
+
+#função deletar
+def deletar():
+    try:
+        treev_dados = tree.focus()
+        treev_dicionario = tree.item(treev_dados)
+        tree_lista = treev_dicionario['values']
+
+        valor_id = [tree_lista[0]]
+
+        deletar_info(valor_id)
+        messagebox.showinfo('Sucesso', 'Dados deletados com sucesso!')
+
+        for widget in frame_direita.winfo_children():
+                widget.destroy()
+
+        mostrar()
+
+    except IndexError:
+        messagebox.showerror('Erro', 'Selecione um dos dados na tabela')
 
 #Nome
 l_nome = Label(frame_baixo, text='Nome: *', anchor=NW, font=('Ivy 10 bold'), bg=co1, fg=co4, relief='flat')
@@ -89,64 +206,61 @@ e_sobre.place(x=15, y=280)
 #Botões
 
 #Botão Inserir
-b_inserir = Button(frame_baixo, text='Inserir', width=10, font=('Ivy 9 bold'), bg=co6, fg=co1, relief='raised', overrelief='ridge')
+b_inserir = Button(frame_baixo, command=inserir, text='Inserir', width=10, font=('Ivy 9 bold'), bg=co6, fg=co1, relief='raised', overrelief='ridge')
 b_inserir.place(x=15, y=330)
 
 #Botão Atualizar
-b_atualizar = Button(frame_baixo, text='Atualizar', width=10, font=('Ivy 9 bold'), bg=co2, fg=co1, relief='raised', overrelief='ridge')
+b_atualizar = Button(frame_baixo,command=atualizar, text='Atualizar', width=10, font=('Ivy 9 bold'), bg=co2, fg=co1, relief='raised', overrelief='ridge')
 b_atualizar.place(x=110, y=330)
 
 #Botão Excluir
-b_excluir = Button(frame_baixo, text='Excluir', width=10, font=('Ivy 9 bold'), bg=co7, fg=co1, relief='raised', overrelief='ridge')
+b_excluir = Button(frame_baixo, command=deletar, text='Excluir', width=10, font=('Ivy 9 bold'), bg=co7, fg=co1, relief='raised', overrelief='ridge')
 b_excluir.place(x=205, y=330)
 
 
 
+def mostrar():
 
-#------------------ codigo para tabela ---------------
+    global tree
 
-lista = [[1,'Joao Futi Muanda','joao@mail.com', 123456789, "12/19/2010", 'Normal', 'gostaria de o consultar pessoalmente'],
-           [2,'Fortnato Mpngo', 'joao@mail.com', 123456789, "12/19/2010", 'Normal', 'gostaria de o consultar pessoalmente'],
-           [3,'Usando Python',  'joao@mail.com', 123456789, "12/19/2010", 'Normal', 'gostaria de o consultar pessoalmente'],
-           [4,'Clinton Berclidio', 'joao@mail.com', 123456789, "12/19/2010", 'Normal', 'gostaria de o consultar pessoalmente'],
-           [5,'A traicao da Julieta','joao@mail.com', 123456789, "12/19/2010", 'Normal', 'gostaria de o consultar pessoalmente']
-           ]
+    lista = mostrar_info()
 
-# lista para cabecario
-tabela_head = ['ID','Nome',  'email','telefone', 'Data', 'Estado','Sobre']
+    # lista para cabecario
+    tabela_head = ['ID','Nome',  'email','telefone', 'Data', 'Estado','Sobre']
 
 
-# criando a tabela
-tree = ttk.Treeview(frame_direita, selectmode="extended", columns=tabela_head, show="headings")
+    # criando a tabela
+    tree = ttk.Treeview(frame_direita, selectmode="extended", columns=tabela_head, show="headings")
 
-# vertical scrollbar
-vsb = ttk.Scrollbar(frame_direita, orient="vertical", command=tree.yview)
+    # vertical scrollbar
+    vsb = ttk.Scrollbar(frame_direita, orient="vertical", command=tree.yview)
 
-# horizontal scrollbar
-hsb = ttk.Scrollbar( frame_direita, orient="horizontal", command=tree.xview)
+    # horizontal scrollbar
+    hsb = ttk.Scrollbar( frame_direita, orient="horizontal", command=tree.xview)
 
-tree.configure(yscrollcommand=vsb.set, xscrollcommand=hsb.set)
-tree.grid(column=0, row=0, sticky='nsew')
-vsb.grid(column=1, row=0, sticky='ns')
-hsb.grid(column=0, row=1, sticky='ew')
+    tree.configure(yscrollcommand=vsb.set, xscrollcommand=hsb.set)
+    tree.grid(column=0, row=0, sticky='nsew')
+    vsb.grid(column=1, row=0, sticky='ns')
+    hsb.grid(column=0, row=1, sticky='ew')
 
-frame_direita.grid_rowconfigure(0, weight=12)
-
-
-hd=["nw","nw","nw","nw","nw","center","center"]
-h=[30,170,140,100,120,50,100]
-n=0
-
-for col in tabela_head:
-    tree.heading(col, text=col.title(), anchor=CENTER)
-    # adjust the column's width to the header string
-    tree.column(col, width=h[n],anchor=hd[n])
-    
-    n+=1
-
-for item in lista:
-    tree.insert('', 'end', values=item)
+    frame_direita.grid_rowconfigure(0, weight=12)
 
 
+    hd=["nw","nw","nw","nw","nw","center","center"]
+    h=[30,170,140,100,120,50,100]
+    n=0
+
+    for col in tabela_head:
+        tree.heading(col, text=col.title(), anchor=CENTER)
+        # adjust the column's width to the header string
+        tree.column(col, width=h[n],anchor=hd[n])
+        
+        n+=1
+
+    for item in lista:
+        tree.insert('', 'end', values=item)
+
+
+mostrar()
 
 janela.mainloop()
