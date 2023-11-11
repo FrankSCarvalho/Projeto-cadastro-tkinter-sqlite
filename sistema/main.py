@@ -49,7 +49,7 @@ app_nome = Label(frame_cima, text='Formulário de consultoria',  font=('Ivy 13 b
 app_nome.place(x=10, y=20)
 
 global tree
-#Configurando Frame Baixo
+
 
 #Função inserir
 def inserir():
@@ -82,8 +82,6 @@ def inserir():
     mostrar()
 
 #Função Atualizar
-
-
 def atualizar():
     try:
         treev_dados = tree.focus()
@@ -144,7 +142,6 @@ def atualizar():
     except IndexError:
         messagebox.showerror('Erro', 'Selecione um dos dados na tabela')
 
-
 #função deletar
 def deletar():
     try:
@@ -165,6 +162,8 @@ def deletar():
     except IndexError:
         messagebox.showerror('Erro', 'Selecione um dos dados na tabela')
 
+
+#Configurando Frame Baixo
 #Nome
 l_nome = Label(frame_baixo, text='Nome: *', anchor=NW, font=('Ivy 10 bold'), bg=co1, fg=co4, relief='flat')
 l_nome.place(x=10, y=10)
