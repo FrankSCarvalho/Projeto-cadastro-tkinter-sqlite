@@ -26,7 +26,7 @@ janela.configure(background=co9)
 janela.resizable(width=FALSE, height=FALSE)
 
 
-# dividindo janela
+# dividindo janela em 3 frames
 
 frame_cima = Frame(janela, width=310, height=50, bg=co2, relief='flat')
 frame_cima.grid(row=0, column=0)
@@ -38,8 +38,7 @@ frame_esquerda = Frame(janela, width=588, height=400, bg=co1, relief='flat')
 frame_esquerda.grid(row=0, column=1, rowspan=2, padx=1, pady=0, sticky=NSEW)
 
 
-#Label cima
-
+#Label de Titulo no Frame de cima
 app_nome = Label(frame_cima, text='Formulário de consultoria',  font=('Ivy 13 bold'), bg=co2, fg=co1, relief='flat')
 app_nome.place(x=10, y=20)
 
