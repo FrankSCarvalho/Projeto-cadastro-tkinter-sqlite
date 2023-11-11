@@ -2,4 +2,4 @@
 
 Nesse projeto vou fazer um sistema de cadastro usando python.
 
-Estou seguinmdo o tutorial da página - https://wiki.python.org.br/GuiDB
+Estou seguindo o tutorial do YouTube - https://www.youtube.com/watch?v=7N25wyyJ7pc
