@@ -1,5 +1,7 @@
+__pycache__
+
+*.db
+
 venv/
 
-dados.db
-sistema/dados.db
-__pycache__
+
