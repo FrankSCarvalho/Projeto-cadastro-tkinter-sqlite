@@ -2,7 +2,7 @@
 
 Nesse projeto vou fazer um sistema de cadastro usando python.
 
-Estou seguindo o tutorial do YouTube do canao Usando Python
+Estou seguindo o tutorial do YouTube do canal Usando Python
 
 video 1 - https://www.youtube.com/watch?v=7N25wyyJ7pc
 
