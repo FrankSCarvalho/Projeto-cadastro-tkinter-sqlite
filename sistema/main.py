@@ -224,7 +224,7 @@ def mostrar():
 
     lista = mostrar_info()
 
-    # lista para cabecario
+    # lista para cabecalho
     tabela_head = ['ID','Nome',  'email','telefone', 'Data', 'Estado','Sobre']
 
 
